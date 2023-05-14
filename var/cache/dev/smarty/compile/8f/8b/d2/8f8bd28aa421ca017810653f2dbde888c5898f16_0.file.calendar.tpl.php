@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.47, created on 2023-05-14 08:31:54
+/* Smarty version 3.1.47, created on 2023-05-14 13:14:28
   from 'C:\laragon\www\prestashop\admin0395oeexz\themes\default\template\helpers\calendar\calendar.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.47',
-  'unifunc' => 'content_64608e6ab4dd52_64330730',
+  'unifunc' => 'content_6460d0a46be8d4_79015813',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_64608e6ab4dd52_64330730 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6460d0a46be8d4_79015813 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div id="datepicker" class="row row-padding-top hide">
 	<div class="col-lg-12">
 		<div class="daterangepicker-days">

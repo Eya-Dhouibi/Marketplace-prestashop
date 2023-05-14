@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.47, created on 2023-05-13 14:27:44
+/* Smarty version 3.1.47, created on 2023-05-14 13:14:43
   from 'C:\laragon\www\prestashop\modules\statsbestcategories\views\templates\hook\bestCategory.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.47',
-  'unifunc' => 'content_645f9050128549_17188525',
+  'unifunc' => 'content_6460d0b305dfb7_30365870',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_645f9050128549_17188525 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6460d0b305dfb7_30365870 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <section class="main-content mt-3">
   <div class="progress-title px-md-5">

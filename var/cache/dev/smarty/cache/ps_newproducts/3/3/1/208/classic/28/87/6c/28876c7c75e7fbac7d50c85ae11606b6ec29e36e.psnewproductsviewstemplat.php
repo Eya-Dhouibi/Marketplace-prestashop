@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.47, created on 2023-05-13 14:27:44
+/* Smarty version 3.1.47, created on 2023-05-14 13:14:42
   from 'module:psnewproductsviewstemplat' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.47',
-  'unifunc' => 'content_645f90500cb0a3_11730730',
+  'unifunc' => 'content_6460d0b2f3a740_29759914',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -30,7 +30,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   ),
   'cache_lifetime' => 31536000,
 ),true)) {
-function content_645f90500cb0a3_11730730 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6460d0b2f3a740_29759914 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!-- begin C:\laragon\www\prestashop/themes/classic/modules/ps_newproducts/views/templates/hook/ps_newproducts.tpl --><!-- begin C:\laragon\www\prestashop/themes/classic/modules/cellule/views/templates/hook/btncellule.tpl -->
 
 <section class="clearfix">

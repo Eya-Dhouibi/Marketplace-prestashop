@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.47, created on 2023-05-14 08:31:54
+/* Smarty version 3.1.47, created on 2023-05-14 13:14:27
   from 'C:\laragon\www\prestashop\modules\ps_metrics\views\templates\hook\HookDashboardZoneTwo.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.47',
-  'unifunc' => 'content_64608e6a610da9_80837599',
+  'unifunc' => 'content_6460d0a3949497_73208868',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_64608e6a610da9_80837599 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6460d0a3949497_73208868 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div id="metrics-app"></div>
 
