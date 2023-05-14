@@ -1,0 +1,13 @@
+{
+    "name": "module/cellule",
+    "description": "Module PrestaShop pour gérer les cellules",
+    "autoload": {
+        "psr-4": {
+            "Cellule\\": "src/"
+          }
+    },
+    "config": {
+        "prepend-autoloader": false
+    },
+    "type": "prestashop-module"
+}

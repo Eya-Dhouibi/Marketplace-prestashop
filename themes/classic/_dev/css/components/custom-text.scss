@@ -1,0 +1,33 @@
+#custom-text {
+  position: relative;
+  color: $white-color;
+  display: $display-flex;
+  background: $primary-bg;
+  justify-content: center;
+  align-items: center;
+  left: -1rem;
+  margin-right: -2rem;
+}
+.btn-vendre{
+  margin-right: 40px;
+  background: $white-color;
+  padding: 20px;
+  border-radius: 25px;
+  color: $primary-bg;
+  font-size:$font-size-sm;
+  font-weight: 600;
+}
+#title-text{
+  font-size: 2rem;
+}
+#custom-text h2 {
+  color: $white-color;
+  text-transform: none;
+}  
+
+@media screen and (max-width:767px){
+  #custom-text {
+    display: flex;
+    flex-direction: column-reverse;
+}
+}

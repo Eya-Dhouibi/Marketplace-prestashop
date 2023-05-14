@@ -1,0 +1,12 @@
+# Prestashop
+app/config/parameters.php
+cache/*
+img/*
+log/*
+themes/*/cache/*
+themes/*/pdf/lang/*
+themes/*/pdf/tcpdf/*
+themes/classic/_dev/node_modules/*
+modules/*/cache/*
+modules/*/translations/*
+vendor/*

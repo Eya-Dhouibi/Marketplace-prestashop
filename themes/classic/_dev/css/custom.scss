@@ -1,0 +1,85 @@
+@import "~bourbon/app/assets/stylesheets/bourbon";
+@import "partials/_variables";
+/*******partials**********/
+@import "partials/_mixins";
+@import "partials/_fonts";
+@import "partials/_commons";
+/*******components**********/
+@import "components/drop-down";
+@import "components/search-widget";
+@import "components/mainmenu";
+@import "components/checkout";
+@import "components/customer";
+@import "components/imageslider";
+@import "components/featuredproducts";
+@import "components/custom-text";
+@import "components/categories";
+@import "components/subcategories";
+@import "components/products";
+@import "components/cart";
+@import "components/block-reassurance";
+@import "components/stores";
+@import "components/footer";
+@import "components/contact";
+@import "components/sitemap";
+@import "components/newsletter";
+@import "components/brands";
+@import "components/customer_sign_in";
+@import "components/banner";
+@import "components/cellule";
+.d-none {
+  display: none;
+}
+.text {
+  &-right {
+    text-align: right;
+  }
+}
+#header{
+  box-shadow: none;
+}
+#header #_desktop_logo h1{
+  margin-top: 1rem;
+}
+#header .header-nav {
+background-color:#e5f0ff ;
+}
+#header .header-nav 
+#_desktop_contact_link 
+#contact-link {
+  margin: 0.5rem;
+}
+#header .header-top>.container>.row:first-of-type {
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  justify-content: center;
+  align-items: center;
+  padding: 0 100PX;
+}
+#header .header-top .position-static {
+  position: static;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#header .header-top{
+  background-color:$white-color;
+  padding-bottom: 1rem;
+}
+#header {
+  background-color:$primary-bg;
+}
+#_desktop_cart{
+  font-size: .8em;
+  color:$primary-color;
+  margin-top: 2rem;
+}
+#header a {
+  font-weight: 500;
+  color:$primary-color;
+  text-align: left;
+}
+.container-nav{
+  margin-left: 5%;
+}

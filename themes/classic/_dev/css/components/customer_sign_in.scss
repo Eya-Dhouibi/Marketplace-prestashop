@@ -1,0 +1,16 @@
+#_desktop_user_info{
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2rem;
+  }
+.user-info{
+  display: flex;
+  align-items: center;
+  }
+@media screen and (max-width: 1920px){
+    #_desktop_user_info{
+      margin-left: 14rem;
+    }
+  }
+
+

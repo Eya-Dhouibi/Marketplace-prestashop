@@ -1,0 +1,44 @@
+#footer {
+  padding-top: 0;
+}
+.footer-container {
+  background-color:$third-color;
+}
+.footer-container .h3, .footer-container .h4 {
+  color:$primary-color;
+}
+.link-list{
+  display: $display-flex;
+}
+/******* social media ********/
+.block-social ul {
+  display: $display-flex;
+  justify-content: center;
+}
+.block-social ul li a {
+  overflow: inherit;
+}
+.social-title{
+  color:$primary-color;
+  text-align: center;
+}
+.block-social {
+  padding: 30PX;
+  text-align: center;
+}
+.copyright {
+  text-align: center;
+  background-color:$white-color;
+  color:$primary-color;
+  font-size:$font-size-lg;
+  padding-top: 1rem;
+}
+.block-social ul li {
+  margin: 0.5rem;
+}
+@media screen and (max-width:767px) {
+  .link-list {
+    display: flex;
+    flex-direction: column;
+}
+}

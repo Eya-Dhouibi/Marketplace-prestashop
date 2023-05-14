@@ -1,0 +1,48 @@
+.menu{
+  display: $display-flex !important;
+}
+.icon-menu {
+  position: absolute;
+  z-index: 10;
+  cursor: pointer;
+  color: #fff;
+  margin-top: .9em;
+  margin-left: 2rem;
+}
+#header .menu {
+  background-color:$primary-bg;
+  display: inline-block;
+  position: relative;
+  margin-left: 2rem;
+}
+.top-menu[data-depth="0"] {
+  margin-bottom: 0;
+  padding: 10px 0;
+}
+.top-menu a[data-depth="0"] {
+  color:$white-color !important;
+  padding: 0.625rem;
+  font-size:$font-size-xs;
+  font-weight: 600;
+}
+.top-menu[data-depth="0"] {
+  margin-left: 3.2em;
+}
+.navigation-menu{
+  width: 20%;
+}
+.item-collapse {
+  background-color:$primary-bg;
+  position: absolute;
+  z-index: 1000;
+  margin-top: 3.8rem;
+}
+@media screen and (max-width: 767px){
+#mobile_top_menu_wrapper {
+  width: 80%;
+  bottom: 4.2rem;
+  padding: 15px;
+  position: relative;
+  z-index: 100;
+}
+}

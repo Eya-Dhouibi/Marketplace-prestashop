@@ -1,0 +1,87 @@
+
+#search_widget {
+  position: absolute;
+  bottom: .5rem;
+  margin-left: 8.5rem !important;
+  height: 2.75rem;
+  border: 1px solid;
+  border-radius: 0 20px 20px 0;
+  overflow: inherit;
+  }
+  
+  #search_widget form input {
+    width: 97%;
+    padding: 12px 10px 10px 20px;
+    background-color:transparent;
+    border-radius: 20px;
+  }
+  
+  .circle {
+    position: absolute;
+    bottom: 0.2rem;
+    right: 0.5rem;
+    width: 30px;
+    height: 30px;
+    background-color: #2777e1;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    cursor: pointer;
+  }
+  
+  #search_widget form i {
+    position: absolute;
+    color: #fff;
+    top: 0.6rem;
+    right: 0.6rem;
+    padding: 0.5rem;
+  }
+
+/* Pour les écrans avec une largeur inférieure à 576px */
+@media (max-width: 575.98px) {
+    #search_widget {
+      top: .5rem;
+      left: -.3rem;
+    }
+  }
+  
+  /* Pour les écrans avec une largeur comprise entre 576px et 767.98px */
+  @media (min-width: 576px) and (max-width: 767.98px) {
+    #search_widget {
+     top: .5rem;
+     left: -.3rem;
+     height: 2.55rem;
+    }
+  }
+  
+  /* Pour les écrans avec une largeur comprise entre 768px et 991.98px */
+  @media (min-width: 768px) and (max-width: 991.98px) {
+    #search_widget {
+    left: 9.4rem !important;
+    top: 1.9rem !important;
+    height: 2.5rem;
+    }
+  }
+  
+//   /* Pour les écrans avec une largeur 992px */
+    @media only screen and (max-width: 992px) {
+     #search_widget {
+      height: 2.5rem;
+      }
+      }
+   /* Pour les écrans avec une largeur supérieure ou égale à 1200px */
+   @media (min-width: 1300px) {
+    #search_widget {
+    min-width: 18rem;
+    }
+  }
+  
+  /* Pour les écrans avec une largeur supérieure ou égale à 1600px */
+  @media (min-width: 1600px) {
+    #search_widget {
+    min-width: 24rem;
+    }
+  }
+  

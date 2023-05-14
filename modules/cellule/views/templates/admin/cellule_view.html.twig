@@ -1,0 +1,73 @@
+{% extends "PrestaShopBundle:Admin:layout.html.twig" %}
+ {% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).on('click', '.toggle-cellule-refuser, .toggle-cellule-accepter', function() {
+    var celluleId = $(this).data('id');
+    var valid = $(this).data('valid');
+
+    $.ajax({
+        url: "{{ path('admin_cellule_toggle', {'id_cellule': 'CELLULE_ID', 'valid': 'VALID_VALUE'}) }}".replace('CELLULE_ID', celluleId).replace('VALID_VALUE', valid),
+        type: 'POST',
+        data: {
+            id_cellule: celluleId,
+            valid: valid
+        },
+        success: function(data) {
+            var refuserButton = $('.toggle-cellule-refuser[data-id=' + celluleId + ']');
+            var accepterButton = $('.toggle-cellule-accepter[data-id=' + celluleId + ']');
+
+            if (valid == 1) {
+                refuserButton.text('Refuser').data('valid', 0);
+                accepterButton.text('Accepté').data('valid', 1);
+            } else {
+                refuserButton.text('Refusé').data('valid', 0);
+                accepterButton.text('Accepter').data('valid', 1);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error(textStatus + ':' + errorThrown);
+        }
+    });
+});
+
+    </script>
+{% endblock %}
+
+{% block content %}
+ {% block page_title %}
+    <h1 class="page-heading">{{ cellule['nom'] }}</h1>
+    <a href="#"><img class="logo-img-top img-thumbnail" 
+    src="/prestashop/img/cellule_logo/{{ cellule['logo'] }}" alt="Logo" style="width:150px;"></a>
+    {% endblock %}
+
+ {% block page_content %}
+    <ul class="cellule-view">
+        <li><h5>{{ "Description"|trans({}, 'Modules.cellule.Admin') }}</h5>{{ cellule['description'] }}</li>
+        <hr />
+        <li><h5>{{ "Email"|trans({}, 'Modules.cellule.Admin') }}</h5>{{ cellule['email'] }}</li>
+        <hr />
+        <li><h5>{{ "Téléphone"|trans({}, 'Modules.cellule.Admin') }}</h5>{{ cellule['telephone'] }}</li>
+        <hr />
+        <li><h5>{{ "Adresse"|trans({}, 'Modules.cellule.Admin') }}</h5>{{ cellule['adresse'] }}</li>
+        <hr />
+        <li><h5> {{ "Imm_fiscale"|trans({}, 'Modules.cellule.Admin') }}</h5>{{ cellule['Imm_fiscale'] }}</li>
+        <hr />
+        <li><h5>{{ "Piece_joindre"|trans({}, 'Modules.cellule.Admin') }}</h5>
+        <img class="logo-img-top img-thumbnail" 
+         src="/prestashop/img/cellule_piece_joindre/{{ cellule['piece_joindre'] }}" alt="Logo" style="width:150px;">
+        </li>
+    </ul>
+     <div class="confirmation">
+       <button type="button" class="btn btn-danger toggle-cellule-refuser" data-id="{{ cellule['id_cellule']}}" data-valid="0">
+       Refuser
+      </button>
+     <button type="button" class="btn btn-success toggle-cellule-accepter" data-id="{{ cellule['id_cellule']}}" data-valid="1">
+       Accepter
+     </button>
+
+        {# <a type="botton" class="btn btn-primary btn-valid" href="#">{{ 'envoyer un email'|trans({}, 'Admin.Actions') }}</a> #}
+    </div> 
+{% endblock %} 
+
+{% endblock %}

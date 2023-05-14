@@ -1,0 +1,13 @@
+#wrapper .banner {
+    width: 1110px;
+    display: block;
+    margin: 0 auto;
+    padding: 0 50px;
+}
+@media (max-width: 991px){
+    #wrapper .banner {
+        width:100%;
+
+    }
+}
+

@@ -1,0 +1,41 @@
+{
+  "name": "prestashop-classic-dev-tools",
+  "version": "1.0.0",
+  "description": "Tools to help while developing the Classic theme",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production --progress",
+    "watch": "webpack --mode development --watch --progress"
+  },
+  "author": "PrestaShop",
+  "license": "AFL-3.0",
+  "devDependencies": {
+    "@prestashop-core/jquery.live-polyfill": "^1.0.3",
+    "autoprefixer": "^10.4.2",
+    "babel-loader": "^8.2.3",
+    "bourbon": "^4.3.4",
+    "css-loader": "^6.5.1",
+    "css-minimizer-webpack-plugin": "^5.0.0",
+    "expose-loader": "^4.1.0",
+    "file-loader": "^6.2.0",
+    "flexibility": "^2.0.0",
+    "material-design-icons": "^3.0.1",
+    "mini-css-extract-plugin": "^2.7.5",
+    "node-sass": "^8.0.0",
+    "notosans-fontface": "~1.1.0",
+    "postcss-flexibility": "^3.0.0",
+    "postcss-loader": "^5.3.0",
+    "sass-loader": "^10.4.1",
+    "style-loader": "^3.0.0",
+    "terser-webpack-plugin": "^5.3.7",
+    "velocity-animate": "^1.5.2",
+    "webpack": "^5.78.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-sources": "^2.2.0"
+  },
+  "dependencies": {
+    "@babel/core": "^7.15.0",
+    "@popperjs/core": "^2.10.2",
+    "bootstrap": "^5.1.3"
+  }
+}
