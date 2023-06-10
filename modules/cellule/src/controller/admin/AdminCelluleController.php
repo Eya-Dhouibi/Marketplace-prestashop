@@ -2,131 +2,142 @@
 
 namespace Cellule\Controller\Admin;
 
-use Db;
+use Cellule\Core\Grid\CelluleGridFactory;
+use Cellule\Repository\CelluleRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Cellule\Core\Search\Filters\CelluleFilters;
+use Cellule\Core\Grid\Query\CelluleQueryBuilder;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use PrestaShopBundle\Security\Annotation\AdminSecurity;
+use PrestaShop\PrestaShop\Core\Form\FormHandlerInterface;
+use PrestaShopBundle\Security\Annotation\ModuleActivated;
+use PrestaShop\PrestaShop\Core\Grid\Search\SearchCriteria;
+use PrestaShop\PrestaShop\Core\Exception\DatabaseException;
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
 
+/**
+ * Class AdminCelluleController.
+ *
+ * @ModuleActivated(moduleName="cellule", redirectRoute="admin_module_manage")
+ */
 class AdminCelluleController extends FrameworkBundleAdminController
 {
-
-    public function indexAction(Request $request)
+    /**
+     * @AdminSecurity("is_granted('read', request.get('_legacy_controller'))", message="Access denied.")
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function listAction(Request $request)
     {
-        // // Récupérer les paramètres de filtre de la requête
-           $filter_column_nom = $request->get('filter_column_nom');
-           $filter_column_email = $request->get('filter_column_email');
-           $filter_column_telephone = $request->get('filter_column_telephone');
-           $filter_column_adresse = $request->get('filter_column_adresse');
-           $filter_column_Imm_fiscale = $request->get('filter_column_Imm_fiscale');
-           $search_term = $request->get('search');
-           $activate_drag_and_drop = true;
-           $filters_disabled = false;
+        $cellulesGridDefinitionFactory = $this->get('prestashop.module.cellule.repository.cellule_definition_factory');
+        $cellulesGridDefinition = $cellulesGridDefinitionFactory->getDefinition();
+        
+        // Accédez à toutes les informations définies
+        $cellulesGridDefinition->getColumns(); 
+        $cellulesGridDefinition->getName(); 
+        $cellulesGridDefinition->getId(); 
 
-         // Définir les valeurs par défaut des paramètres de tri
-            $orderBy = $request->get('orderBy', 'id_cellule');
-            $sortOrder = $request->get('sortOrder', 'desc');
+        $filters = [
+            'id_cellule' => 4,
+        ];
+        
+        $searchCriteria = new SearchCriteria(
+            $filters,
+            'id_cellule',
+            'asc',
+            0,
+            10
+        );
+        
+        $searchCriteria->getFilters();  
+        $searchCriteria->getOrderBy();  
+        $searchCriteria->getOrderWay(); 
+        $searchCriteria->getOffset(); 
+        $searchCriteria->getLimit(); 
+        
+     
+        /** @var \PrestaShop\PrestaShop\Core\Grid\Data\Factory\GridDataFactoryInterface $celluleGridDataFactory */
+        $celluleDataFactory = $this->get('prestashop.module.cellule.grid.data_factory');
+        $celluleGridData = $celluleDataFactory->getData($searchCriteria);
 
-        // Construire la requête SQL
-          $sql = 'SELECT * FROM `'._DB_PREFIX_.'cellule` WHERE 1=1';
+        $celluleGridData->getRecords(); 
+        $celluleGridData->getRecordsTotal(); 
+        $celluleGridData->getQuery(); 
 
-          if ($filter_column_nom !== '') {
-              $sql .= ' AND `nom` LIKE "%'.$filter_column_nom.'%"';
-          }
-          if ($filter_column_email !== '') {
-             $sql .= ' AND `email` LIKE "%'.$filter_column_email.'%"';
-          }
-           if ($filter_column_telephone !== '') {
-              $sql .= ' AND `telephone` LIKE "%'.$filter_column_telephone.'%"';
-           }
-           if ($filter_column_adresse !== '') {
-              $sql .= ' AND `adresse` LIKE "%'.$filter_column_adresse.'%"';
-            }
-           if ($filter_column_Imm_fiscale !== '') {
-              $sql .= ' AND `Imm_fiscale` LIKE "%'.$filter_column_Imm_fiscale.'%"';
-           }
-            $sql .= ' ORDER BY `'.$orderBy.'` '.$sortOrder;
+        $celluleGridFactory = $this->get('prestashop.module.cellule.grid.factory');
+        $celluleGrid = $celluleGridFactory->getGrid($searchCriteria);
 
-        // Exécuter la requête SQL
-         $cellules = Db::getInstance()->executeS($sql);
-
-        return $this->render('@Modules/cellule/views/templates/admin/index.html.twig',[
+        $celluleQueryBuilder = new CelluleQueryBuilder($this->get('doctrine.dbal.default_connection'), _DB_PREFIX_, $this->getContext()->language->id);
+        $qb = $celluleQueryBuilder->getAllDataQueryBuilder();
+        $cellules = $qb->execute()->fetchAll();
+        
+        return $this->render('@Modules/cellule/views/templates/admin/index.html.twig', [
+            // $this->presentGrid() est une méthode d'assistance fournie par FrameworkBundleAdminController
+            'celluleGrid' => $this->presentGrid($celluleGrid),
             'cellules' => $cellules,
-             'orderBy' => $orderBy,
-             'sortOrder' => $sortOrder,
-              'filter_column_nom' => $filter_column_nom,
-              'filter_column_email' => $filter_column_email,
-              'filter_column_telephone' => $filter_column_telephone,
-              'filter_column_adresse' => $filter_column_adresse,
-              'filter_column_Imm_fiscale' => $filter_column_Imm_fiscale,
-               'activate_drag_and_drop' => $activate_drag_and_drop,
-              //'filters_disabled' => $filters_disabled,
+           
         ]);
-    }
-    public function getCelluleById($id)
-    {
-        $sql = 'SELECT * FROM ' . _DB_PREFIX_ . 'cellule WHERE id_cellule = ' . (int)$id;
-        $result = Db::getInstance()->getRow($sql);
-
-        return $result;
+    
     }
 
-    // action "view" pour afficher les détails d'une cellule
-    public function viewAction($id_cellule)
+    public function viewAction($celluleId)
     {
-        $cellule = $this->getCelluleById($id_cellule);
-
-        if (!$cellule || !isset($cellule['id_cellule'])) {
-            throw new NotFoundHttpException('Cellule non trouvée');
+        $celluleRepository = $this->get('prestashop.module.cellule.repository');
+        $cellule = $celluleRepository->getCelluleById($celluleId);
+    
+        if (!$cellule) {
+            throw $this->createNotFoundException('Cellule non trouvée');
         }
-        // retourner une réponse avec les détails de la cellule
+    
         return $this->render('@Modules/cellule/views/templates/admin/cellule_view.html.twig', [
             'cellule' => $cellule,
         ]);
     }
 
-    // action "delete" pour supprimer une cellule
-    function deleteAction($id_cellule, Request $request)
-    {
-    $cellule = $this->getCelluleById($id_cellule);
+/**
+ * @AdminSecurity("is_granted('delete', request.get('_legacy_controller'))", message="Access denied.")
+ *
+ * @param int $celluleId
+ *
+ * @return RedirectResponse
+ */
+public function deleteAction($celluleId)
+{
+    $repository = $this->get('prestashop.module.cellule.repository');
+    $errors = [];
 
-    $sql = 'DELETE FROM `' . _DB_PREFIX_ . 'cellule` WHERE `id_cellule` = ' . (int) $id_cellule;
-    $result = Db::getInstance()->execute($sql);
-    $session = new Session();
-    if ($result) {
+    try {
+        $request = $this->get('request_stack')->getCurrentRequest();
+        $repository->delete($request, $celluleId);
+        $session = new Session();
         $session->getFlashBag()->add('success', 'La cellule a été supprimée avec succès');
-    } else {
-        $session->getFlashBag()->add('error', 'Erreur lors de la suppression de la cellule');
+    } catch (DatabaseException $e) {
+        $errors[] = [
+            'key' => sprintf('Could not delete #%d', $celluleId),
+            'domain' => 'Admin.Catalog.Notification',
+            'parameters' => [$celluleId],
+        ];
     }
 
+    // Rediriger l'utilisateur vers une page appropriée
     return $this->redirectToRoute('admin_cellule');
-   }
-
-
-   public function toggleCellule(Request $request): Response
-   {
-       // Vérifier que la requête est de type POST
-       if (!$request->isMethod('POST')) {
-           throw new \RuntimeException('Invalid request method');
-       }
-   
-       // Récupérer les paramètres de la requête
-       $id_cellule = $request->request->getInt('id_cellule');
-       $valid = $request->request->getInt('valid');
-   
-       // Activer ou désactiver la cellule dans la base de données
-       $query = 'UPDATE `' . _DB_PREFIX_ . 'cellule` SET `valid` = ' . (int) $valid . ' WHERE `id_cellule` = ' . (int) $id_cellule;
-       Db::getInstance()->execute($query);
-       $message = $valid ? 'La cellule a été valider avec succès' : 'La cellule a été refuser';
-       $status = $valid ? 'success' : 'error';
-
-       $response = new JsonResponse(['message' => $message, 'status' => $status]);
-       return $response;
-   }
-
-
 }
 
+    /**
+     * @param Request $request
+     *
+     * @return array
+     */
+    protected function buildFiltersParamsByRequest(Request $request)
+    {
+        $filtersParams = array();
+        $filtersParams = array_merge(CelluleFilters::getDefaults(), $request->query->all());
+        $filtersParams['filters']['id_lang'] = $this->getContext()->language->id;
 
+        return $filtersParams;
+    }
+}

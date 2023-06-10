@@ -66,6 +66,7 @@
         "pear/pear-core-minimal": "v1.10.11",
         "pear/pear_exception": "v1.0.2",
         "pelago/emogrifier": "v2.2.0",
+        "phpmailer/phpmailer": "6.5.0",
         "phpoffice/phpspreadsheet": "1.12.0",
         "phpspec/prophecy": "v1.10.3",
         "prestashop/blockreassurance": "4.1.1",
@@ -93,6 +94,7 @@
         "prestashop/ps_customersignin": "v2.0.5",
         "prestashop/ps_customtext": "v4.2.0",
         "prestashop/ps_dataprivacy": "v2.1.0",
+        "prestashop/ps_emailalerts": "^2.4",
         "prestashop/ps_emailsubscription": "v2.7.0",
         "prestashop/ps_facetedsearch": "v3.8.0",
         "prestashop/ps_faviconnotificationbo": "v2.1.1",
@@ -158,7 +160,6 @@
         "symfony/polyfill-php70": "v1.20.0",
         "symfony/polyfill-php72": "v1.27.0",
         "symfony/polyfill-php73": "v1.27.0",
-        "symfony/symfony": "v3.4.49",
         "twig/twig": "v1.43.1",
         "webmozart/assert": "1.9.1",
         "willdurand/jsonp-callback-validator": "v1.1.0"

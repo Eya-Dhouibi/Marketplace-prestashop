@@ -22,11 +22,16 @@
           <div class="carousel-item{if $smarty.foreach.slider_loop.first} active{/if}">
             <div class="row cellule-slider">
         {/if}
-        <div class="col-12 col-md-3">
-          <a href="" class="thumbnail cellule-thumbnail">
-            <img src="/prestashop/img/cellule_logo/{$cellule['logo']}" alt="logo" style="width:100px;"/>
-          </a>
-        </div>
+
+        {if $cellule.valid == 1}
+          <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <a href="{$link->getModuleLink('cellule', 'list', ['id_cellule' => $cellule.id_cellule], true)|escape:'html':'UTF-8'}" 
+               class="thumbnail cellule-thumbnail">
+              <img src="/prestashop/img/cellule_logo/{$cellule['logo']}" alt="logo" style="width:100px;"/>
+            </a>
+          </div>
+        {/if}
+        
         {if $smarty.foreach.slider_loop.iteration % 4 == 0 || $smarty.foreach.slider_loop.last}
             </div>
           </div>

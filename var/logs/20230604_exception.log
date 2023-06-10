@@ -1,0 +1,15 @@
+*ERROR* 	v1.7.8.8	2023/06/04 - 19:29:20: Unknown column &#039;controller&#039; in &#039;where clause&#039;&lt;br /&gt;&lt;br /&gt;&lt;pre&gt;SELECT type, id_value, filter_show_limit, filter_type FROM ps_layered_category
+            WHERE controller = &#039;category&#039;
+            AND id_category = 11
+            AND id_shop = 1
+            GROUP BY `type`, id_value ORDER BY position ASC&lt;/pre&gt; at line 769 in file classes/db/Db.php
+*ERROR* 	v1.7.8.8	2023/06/04 - 19:29:32: Unknown column &#039;controller&#039; in &#039;where clause&#039;&lt;br /&gt;&lt;br /&gt;&lt;pre&gt;SELECT type, id_value, filter_show_limit, filter_type FROM ps_layered_category
+            WHERE controller = &#039;category&#039;
+            AND id_category = 10
+            AND id_shop = 1
+            GROUP BY `type`, id_value ORDER BY position ASC&lt;/pre&gt; at line 769 in file classes/db/Db.php
+*ERROR* 	v1.7.8.8	2023/06/04 - 22:41:18: Unknown column &#039;controller&#039; in &#039;where clause&#039;&lt;br /&gt;&lt;br /&gt;&lt;pre&gt;SELECT type, id_value, filter_show_limit, filter_type FROM ps_layered_category
+            WHERE controller = &#039;category&#039;
+            AND id_category = 10
+            AND id_shop = 1
+            GROUP BY `type`, id_value ORDER BY position ASC&lt;/pre&gt; at line 769 in file classes/db/Db.php

@@ -25,27 +25,10 @@
 * Don't forget to prefix your containers with your own identifier
 * to avoid any conflicts with others containers.
 */
-// $(document).on('click', '.toggle-cellule', function() {
-//     var celluleId = $(this).data('id');
-//     var valid = $(this).data('valid') ? 0 : 1;
-
-//     $.ajax({
-//         url: "{{ path('admin_cellule_toggle', {'id_cellule': 'CELLULE_ID', 'valid': 'VALID_VALUE'}) }}".replace('CELLULE_ID', celluleId).replace('VALID_VALUE', valid),
-//         type: 'POST',
-//         data: {
-//             id_cellule: celluleId,
-//             valid: valid
-//         },
-//         success: function(data) {
-//             var button = $('.toggle-cellule[data-id=' + celluleId + ']');
-//             if (valid) {
-//                 button.text('Désactiver').data('valid', true);
-//             } else {
-//                 button.text('Activer').data('valid', false);
-//             }
-//         },
-//         error: function(jqXHR, textStatus, errorThrown) {
-//             console.error(textStatus + ':' + errorThrown);
-//         }
-//     });
-// });
+$(document).ready(function () {
+    $('#example').DataTable({
+        paging: false,
+        ordering: false,
+        info: false,
+    });
+});

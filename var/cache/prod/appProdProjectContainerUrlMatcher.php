@@ -7479,7 +7479,7 @@ class appProdProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBundle\R
             elseif (0 === strpos($pathinfo, '/modules/cellule')) {
                 // admin_cellule
                 if ('/modules/cellule' === $pathinfo) {
-                    $ret = array (  '_controller' => 'Cellule\\Controller\\Admin\\AdminCelluleController::indexAction',  '_legacy_controller' => 'AdminCellule',  '_route' => 'admin_cellule',);
+                    $ret = array (  '_controller' => 'Cellule\\Controller\\Admin\\AdminCelluleController::listAction',  '_legacy_controller' => 'AdminCellule',  '_route' => 'admin_cellule',);
                     if (!in_array($canonicalMethod, ['GET'])) {
                         $allow = array_merge($allow, ['GET']);
                         goto not_admin_cellule;
@@ -7490,8 +7490,8 @@ class appProdProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBundle\R
                 not_admin_cellule:
 
                 // admin_cellule_view
-                if (0 === strpos($pathinfo, '/modules/cellule/view') && preg_match('#^/modules/cellule/view/(?P<id_cellule>[^/]++)$#sD', $pathinfo, $matches)) {
-                    $ret = $this->mergeDefaults(array_replace($matches, ['_route' => 'admin_cellule_view']), array (  '_controller' => 'Cellule\\Controller\\Admin\\AdminCelluleController::viewAction',));
+                if (0 === strpos($pathinfo, '/modules/cellule/view') && preg_match('#^/modules/cellule/view/(?P<celluleId>[^/]++)$#sD', $pathinfo, $matches)) {
+                    $ret = $this->mergeDefaults(array_replace($matches, ['_route' => 'admin_cellule_view']), array (  '_controller' => 'Cellule\\Controller\\Admin\\AdminCelluleController::viewAction',  '_legacy_controller' => 'AdminCellule',));
                     if (!in_array($canonicalMethod, ['GET'])) {
                         $allow = array_merge($allow, ['GET']);
                         goto not_admin_cellule_view;
@@ -7502,10 +7502,10 @@ class appProdProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBundle\R
                 not_admin_cellule_view:
 
                 // admin_cellule_delete
-                if (0 === strpos($pathinfo, '/modules/cellule/delete') && preg_match('#^/modules/cellule/delete/(?P<id_cellule>[^/]++)$#sD', $pathinfo, $matches)) {
-                    $ret = $this->mergeDefaults(array_replace($matches, ['_route' => 'admin_cellule_delete']), array (  '_controller' => 'Cellule\\Controller\\Admin\\AdminCelluleController::deleteAction',));
-                    if (!in_array($requestMethod, ['POST'])) {
-                        $allow = array_merge($allow, ['POST']);
+                if (0 === strpos($pathinfo, '/modules/cellule/delete') && preg_match('#^/modules/cellule/delete/(?P<celluleId>[^/]++)$#sD', $pathinfo, $matches)) {
+                    $ret = $this->mergeDefaults(array_replace($matches, ['_route' => 'admin_cellule_delete']), array (  '_controller' => 'Cellule\\Controller\\Admin\\AdminCelluleController::deleteAction',  '_legacy_controller' => 'AdminCellule',));
+                    if (!in_array($canonicalMethod, ['GET'])) {
+                        $allow = array_merge($allow, ['GET']);
                         goto not_admin_cellule_delete;
                     }
 
@@ -7526,6 +7526,84 @@ class appProdProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBundle\R
                 return $ret;
             }
             not_admin_module_catalog_refresh:
+
+            // admin_cellule_toggle
+            if (0 === strpos($pathinfo, '/modules/admin/cellule/toggle') && preg_match('#^/modules/admin/cellule/toggle/(?P<celluleId>[^/]++)/(?P<valid>[^/]++)$#sD', $pathinfo, $matches)) {
+                $ret = $this->mergeDefaults(array_replace($matches, ['_route' => 'admin_cellule_toggle']), array (  '_controller' => 'Cellule\\Controller\\Admin\\AdminCelluleController::toggleCellule',));
+                if (!in_array($canonicalMethod, ['GET', 'POST'])) {
+                    $allow = array_merge($allow, ['GET', 'POST']);
+                    goto not_admin_cellule_toggle;
+                }
+
+                return $ret;
+            }
+            not_admin_cellule_toggle:
+
+            if (0 === strpos($pathinfo, '/modules/addons')) {
+                if (0 === strpos($pathinfo, '/modules/addons/modules/catalog')) {
+                    // admin_mbo_catalog_module
+                    if ('/modules/addons/modules/catalog' === $pathinfo) {
+                        $ret = array (  '_controller' => 'mbo.controller.modules:catalogAction',  '_legacy_controller' => 'AdminPsMboModule',  '_legacy_link' => 'AdminPsMboModule',  '_route' => 'admin_mbo_catalog_module',);
+                        if (!in_array($canonicalMethod, ['GET'])) {
+                            $allow = array_merge($allow, ['GET']);
+                            goto not_admin_mbo_catalog_module;
+                        }
+
+                        return $ret;
+                    }
+                    not_admin_mbo_catalog_module:
+
+                    // admin_mbo_catalog_module_selection
+                    if ('/modules/addons/modules/catalog/selection' === $pathinfo) {
+                        $ret = array (  '_controller' => 'mbo.controller.modules.selection:indexAction',  '_legacy_controller' => 'AdminPsMboAddons',  '_legacy_link' => 'AdminPsMboAddons',  '_route' => 'admin_mbo_catalog_module_selection',);
+                        if (!in_array($canonicalMethod, ['GET'])) {
+                            $allow = array_merge($allow, ['GET']);
+                            goto not_admin_mbo_catalog_module_selection;
+                        }
+
+                        return $ret;
+                    }
+                    not_admin_mbo_catalog_module_selection:
+
+                }
+
+                // admin_mbo_recommended_modules
+                if ('/modules/addons/modules/recommended' === $pathinfo) {
+                    $ret = array (  '_controller' => 'mbo.controller.modules.recommended:indexAction',  '_legacy_controller' => 'AdminPsMboRecommended',  '_legacy_link' => 'AdminPsMboRecommended',  '_route' => 'admin_mbo_recommended_modules',);
+                    if (!in_array($canonicalMethod, ['GET'])) {
+                        $allow = array_merge($allow, ['GET']);
+                        goto not_admin_mbo_recommended_modules;
+                    }
+
+                    return $ret;
+                }
+                not_admin_mbo_recommended_modules:
+
+                // admin_mbo_catalog_theme
+                if ('/modules/addons/themes/catalog' === $pathinfo) {
+                    $ret = array (  '_controller' => 'mbo.controller.themes.catalog:indexAction',  '_legacy_controller' => 'AdminPsMboTheme',  '_legacy_link' => 'AdminPsMboTheme',  '_route' => 'admin_mbo_catalog_theme',);
+                    if (!in_array($canonicalMethod, ['GET'])) {
+                        $allow = array_merge($allow, ['GET']);
+                        goto not_admin_mbo_catalog_theme;
+                    }
+
+                    return $ret;
+                }
+                not_admin_mbo_catalog_theme:
+
+            }
+
+            // demo_admin_orders_mark_order
+            if (0 === strpos($pathinfo, '/modules/demoextendgrid') && preg_match('#^/modules/demoextendgrid/(?P<orderId>\\d+)/mark\\-order$#sD', $pathinfo, $matches)) {
+                $ret = $this->mergeDefaults(array_replace($matches, ['_route' => 'demo_admin_orders_mark_order']), array (  '_controller' => 'PrestaShop\\Module\\DemoExtendGrid\\Controller\\DemoOrderController::markOrderAction',));
+                if (!in_array($requestMethod, ['POST'])) {
+                    $allow = array_merge($allow, ['POST']);
+                    goto not_demo_admin_orders_mark_order;
+                }
+
+                return $ret;
+            }
+            not_demo_admin_orders_mark_order:
 
             if (0 === strpos($pathinfo, '/modules/link-widget')) {
                 // admin_link_block_list
@@ -7617,60 +7695,6 @@ class appProdProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBundle\R
                     return $ret;
                 }
                 not_admin_link_block_update_positions:
-
-            }
-
-            elseif (0 === strpos($pathinfo, '/modules/addons')) {
-                if (0 === strpos($pathinfo, '/modules/addons/modules/catalog')) {
-                    // admin_mbo_catalog_module
-                    if ('/modules/addons/modules/catalog' === $pathinfo) {
-                        $ret = array (  '_controller' => 'mbo.controller.modules:catalogAction',  '_legacy_controller' => 'AdminPsMboModule',  '_legacy_link' => 'AdminPsMboModule',  '_route' => 'admin_mbo_catalog_module',);
-                        if (!in_array($canonicalMethod, ['GET'])) {
-                            $allow = array_merge($allow, ['GET']);
-                            goto not_admin_mbo_catalog_module;
-                        }
-
-                        return $ret;
-                    }
-                    not_admin_mbo_catalog_module:
-
-                    // admin_mbo_catalog_module_selection
-                    if ('/modules/addons/modules/catalog/selection' === $pathinfo) {
-                        $ret = array (  '_controller' => 'mbo.controller.modules.selection:indexAction',  '_legacy_controller' => 'AdminPsMboAddons',  '_legacy_link' => 'AdminPsMboAddons',  '_route' => 'admin_mbo_catalog_module_selection',);
-                        if (!in_array($canonicalMethod, ['GET'])) {
-                            $allow = array_merge($allow, ['GET']);
-                            goto not_admin_mbo_catalog_module_selection;
-                        }
-
-                        return $ret;
-                    }
-                    not_admin_mbo_catalog_module_selection:
-
-                }
-
-                // admin_mbo_recommended_modules
-                if ('/modules/addons/modules/recommended' === $pathinfo) {
-                    $ret = array (  '_controller' => 'mbo.controller.modules.recommended:indexAction',  '_legacy_controller' => 'AdminPsMboRecommended',  '_legacy_link' => 'AdminPsMboRecommended',  '_route' => 'admin_mbo_recommended_modules',);
-                    if (!in_array($canonicalMethod, ['GET'])) {
-                        $allow = array_merge($allow, ['GET']);
-                        goto not_admin_mbo_recommended_modules;
-                    }
-
-                    return $ret;
-                }
-                not_admin_mbo_recommended_modules:
-
-                // admin_mbo_catalog_theme
-                if ('/modules/addons/themes/catalog' === $pathinfo) {
-                    $ret = array (  '_controller' => 'mbo.controller.themes.catalog:indexAction',  '_legacy_controller' => 'AdminPsMboTheme',  '_legacy_link' => 'AdminPsMboTheme',  '_route' => 'admin_mbo_catalog_theme',);
-                    if (!in_array($canonicalMethod, ['GET'])) {
-                        $allow = array_merge($allow, ['GET']);
-                        goto not_admin_mbo_catalog_theme;
-                    }
-
-                    return $ret;
-                }
-                not_admin_mbo_catalog_theme:
 
             }
 

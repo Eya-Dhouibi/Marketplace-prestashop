@@ -21,7 +21,7 @@
                     </span>
                   </span>
                 {/if}
-                <h3>{$node.label}</h3>
+                <h4>{$node.label}</h4>
               </a>
          
               {if $node.children|count}
@@ -35,6 +35,7 @@
     {/if}
 {/function}
 
+<div class="js-top-menu position-static hidden-sm-down" id="_desktop_top_menu">
 <div class="navigation-menu">
 <span class="material-icons icon-menu navbar-toggler" 
 data-toggle="collapse" data-target="#navbarSupportedContent15"
@@ -45,10 +46,11 @@ aria-label="Toggle navigation">menu</span>
   <div class="clearfix"></div>
   </div>
   </div>
-
-<div class="menu js-top-menu position-static hidden-sm-down" id="_desktop_top_menu">
+  
+<div class="menu menu-horizontale">
     {menu nodes=$menu.children}
     <div class="clearfix"></div>
+</div>
 </div> 
 
 

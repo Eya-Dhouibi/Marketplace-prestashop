@@ -1,26 +1,31 @@
 admin_cellule:
-    path: /cellule
-    methods: [GET]
-    defaults:
-        _controller: 'Cellule\Controller\Admin\AdminCelluleController::indexAction'
-        _legacy_controller: AdminCellule
+  path: /cellule
+  methods: [GET]
+  defaults:
+    _controller: 'Cellule\Controller\Admin\AdminCelluleController::listAction'
+    _legacy_controller: AdminCellule
 
 admin_cellule_view:
-   path: /cellule/view/{id_cellule}
+   path: /cellule/view/{celluleId}
    defaults:
        _controller: 'Cellule\Controller\Admin\AdminCelluleController::viewAction'
        _legacy_controller: AdminCellule
    methods: [GET]
     
 admin_cellule_delete:
-    path: /cellule/delete/{id_cellule}
-    defaults:
-        _controller: 'Cellule\Controller\Admin\AdminCelluleController::deleteAction'
-        _legacy_controller: AdminCellule
-    methods: [POST]      
+  path: /cellule/delete/{celluleId}
+  defaults:
+    _controller: 'Cellule\Controller\Admin\AdminCelluleController::deleteAction'
+    _legacy_controller: AdminCellule
+  methods: [GET]
+     
 
 admin_cellule_toggle:
-    path: /admin/cellule/toggle/{id_cellule}/{valid}
+    path: /admin/cellule/toggle/{celluleId}/{valid}
     defaults:
         _controller: 'Cellule\Controller\Admin\AdminCelluleController::toggleCellule'
     methods: [GET, POST]
+
+
+
+

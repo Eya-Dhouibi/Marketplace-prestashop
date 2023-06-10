@@ -20,6 +20,7 @@ class __TwigTemplate_3d0555f7630f3ac90ef69ed5f888e75a888b85909455efb5cac06ea891e
 
         $this->blocks = [
             'content' => [$this, 'block_content'],
+            'javascripts' => [$this, 'block_javascripts'],
         ];
     }
 
@@ -35,35 +36,34 @@ class __TwigTemplate_3d0555f7630f3ac90ef69ed5f888e75a888b85909455efb5cac06ea891e
         $this->parent->display($context, array_merge($this->blocks, $blocks));
     }
 
-    // line 2
+    // line 4
     public function block_content($context, array $blocks = [])
     {
-        // line 3
-        echo "  <div class=\"row\">
-    <div class=\"col-sm-12\">
-      <div id=\"ajax_confirmation\" class=\"alert alert-success\" style=\"display: none;\"></div>
-      <div class=\"_cellule_desktop\">
-        <div class=\"content container-fluid\">
-          ";
-        // line 15
-        echo "
-          <div class=\"table-responsive\">
-            <table class=\"table cellule mt-3\">
-              ";
-        // line 18
-        $this->loadTemplate("@Modules/cellule/views/templates/admin/cellule_table.html.twig", "@Modules/cellule/views/templates/admin/index.html.twig", 18)->display($context);
-        // line 19
-        echo "              ";
-        $this->loadTemplate("@Modules/cellule/views/templates/admin/cellule_list.html.twig", "@Modules/cellule/views/templates/admin/index.html.twig", 19)->display($context);
-        // line 20
-        echo "            </table>
-          </div>
-
-          <!---pagination-->
-        </div>
-      </div>
+        // line 5
+        echo "    <div class=\"row\">
+     <div class=\"col-sm-12\">
+       ";
+        // line 7
+        $this->loadTemplate("@Modules/cellule/views/templates/admin/grid_panel.html.twig", "@Modules/cellule/views/templates/admin/index.html.twig", 7)->display(twig_array_merge($context, ["grid" => ($context["celluleGrid"] ?? null)]));
+        // line 8
+        echo "        </div>
     </div>
-  </div>
+    
+";
+    }
+
+    // line 13
+    public function block_javascripts($context, array $blocks = [])
+    {
+        // line 14
+        echo "    ";
+        $this->displayParentBlock("javascripts", $context, $blocks);
+        echo "
+
+    <script src=\"";
+        // line 16
+        echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\AssetExtension')->getAssetUrl("../modules/cellule/views/public/grid.bundle.js"), "html", null, true);
+        echo "\"></script>
 ";
     }
 
@@ -79,7 +79,7 @@ class __TwigTemplate_3d0555f7630f3ac90ef69ed5f888e75a888b85909455efb5cac06ea891e
 
     public function getDebugInfo()
     {
-        return array (  59 => 20,  56 => 19,  54 => 18,  49 => 15,  42 => 3,  39 => 2,  29 => 1,);
+        return array (  65 => 16,  59 => 14,  56 => 13,  49 => 8,  47 => 7,  43 => 5,  40 => 4,  30 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */

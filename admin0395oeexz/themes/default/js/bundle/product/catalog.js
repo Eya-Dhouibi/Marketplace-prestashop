@@ -147,7 +147,6 @@ function updateFilterMenu() {
   });
   const filtersNotUpdatedYet = (count === 0 && productCatalogFilterChanged === false);
   $('button[name="products_filter_submit"]').prop('disabled', filtersNotUpdatedYet);
-  $('button[name="cellules_filter_submit"]').prop('disabled', filtersNotUpdatedYet);
   $('button[name="products_filter_reset"]').toggle(!filtersNotUpdatedYet);
 }
 

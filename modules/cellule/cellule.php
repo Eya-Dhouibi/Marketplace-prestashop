@@ -28,8 +28,8 @@ if (!defined('_PS_VERSION_')) {
     exit;
 }
 
-// error_reporting(E_ALL);
-// ini_set('display_errors', 1);
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 use PrestaShop\PrestaShop\Core\Module\WidgetInterface;
 require_once(_PS_MODULE_DIR_.'cellule/classes/CelluleTab.php');
@@ -139,4 +139,4 @@ class Cellule extends Module implements WidgetInterface
 
      }
 
-    }
+}

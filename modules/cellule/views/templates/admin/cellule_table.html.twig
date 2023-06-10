@@ -1,119 +1,132 @@
-<thead class="with-filters">
-{% block cellule_form_table_header %}
- <tr class="column-headers">
- <th scope="col" style="width: 2rem"></th>
- <th scope="col" style="width: 5rem">
-    {{ ps.sortable_column_header("ID"|trans({}, 'Admin.Global'), 'id_cellule', orderBy, sortOrder) }}
- </th>
- <th scope="col">
-   {{ "logo"|trans({}, 'Admin.Global') }}
- </th>
- <th scope="col">
-  {{ ps.sortable_column_header("nom"|trans({}, 'Admin.Global'), 'nom', orderBy, sortOrder) }}
- </th>
- <th scope="col" style="width: 9%">
-  {{ ps.sortable_column_header("email"|trans({}, 'Admin.Global'), 'email', orderBy, sortOrder) }}
- </th>
- <th scope="col">
-  {{ ps.sortable_column_header("telephone"|trans({}, 'Admin.Global'), 'telephone', orderBy, sortOrder) }}
- </th>
- <th scope="col" style="width: 9%">
-  {{ ps.sortable_column_header("adresse"|trans({}, 'Admin.Global'), 'adresse', orderBy, sortOrder) }}
- </th>
-  <th scope="col" style="width: 9%">
-  {{ ps.sortable_column_header("Imm_fiscale"|trans({}, 'Admin.Global'), 'Imm_fiscale', orderBy, sortOrder) }}
- </th>
- <th scope="col" class="text-center">
-  {{ ps.sortable_column_header("Status"|trans({}, 'Admin.Global'), 'active', orderBy, sortOrder) }}
- </th>
- <th scope="col" class="text-right" style="width: 3rem; padding-right: 2rem">
-  {{ "Actions"|trans({}, 'Admin.Global') }}
- </th> 
-</tr>
- {% endblock %}
-   {% block cellule_table_filters %}
-       {% set filters_disabled = activate_drag_and_drop %} 
-        <tr class="column-filters">
-          <th>&nbsp;</th>
-          <th>&nbsp;</th> 
-          <th>&nbsp;</th>  
-          <th>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="{{ "Search name"|trans({}, 'Modules.cellule.Admin') }}"
-              name="filter_column_nom"
-              value="{{ filter_column_nom }}"
-               aria-label="{{ "%inputId% input"|trans({'%inputId%': 'filter_column_nom'}, 'Admin.Global') }}"
-              {% if filters_disabled %}disabled{% endif %}
-            />
-          </th>
-          <th>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="{{ "Search email"|trans({}, 'Modules.cellule.Admin') }}"
-              name="filter_column_email"
-              value="{{ filter_column_email }}"
-              aria-label="{{ "%inputId% input"|trans({'%inputId%': 'filter_column_email'}, 'Admin.Global') }}"
-              {% if filters_disabled %}disabled{% endif %}
-            />
-          </th>
-          <th>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="{{ "Search téléphone"|trans({}, 'Modules.cellule.Admin') }}"
-              name="filter_column_telephone"
-              value="{{ filter_column_telephone }}"
-              aria-label="{{ "%inputId% input"|trans({'%inputId%': 'telephone'}, 'Admin.Global') }}"
-              {% if filters_disabled %}disabled{% endif %}
-            />
-          </th>
-          <th>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="{{ "Search adresse"|trans({}, 'Modules.cellule.Admin') }}"
-              name="filter_column_adresse"
-              value="{{ filter_column_adresse }}"
-              aria-label="{{ "%inputId% input"|trans({'%inputId%': 'filter_column_adresse'}, 'Admin.Global') }}"
-              {% if filters_disabled %}disabled{% endif %}
-            />
-          </th>
-           <th>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="{{ "Search Imm_fiscale"|trans({}, 'Modules.cellule.Admin') }}"
-              name="filter_column_Imm_fiscale"
-              value="{{ filter_column_Imm_fiscale }}"
-              aria-label="{{ "%inputId% input"|trans({'%inputId%': 'filter_column_Imm_fiscale'}, 'Admin.Global') }}"
-              {% if filters_disabled %}disabled{% endif %}
-            />
-          </th>
-          <th id="cellule_filter_column_active" class="text-center">
-            <div class="form-select">
-              <select class="custom-select"  name="filter_column_active"{% if filters_disabled %} disabled{% endif %} aria-label="{{ "%inputId% select"|trans({'%inputId%': 'filter_column_active'}, 'Admin.Global') }}"
-                >
-                <option value=""></option>
-                <option value="1" {% if (filter_column_active is defined) and filter_column_active == '1' %}selected="selected"{% endif %}>Active</option>
-                <option value="0" {% if (filter_column_active is defined) and filter_column_active == '0' %}selected="selected"{% endif %}>Inactive</option>
-              </select>
-            </div>
-          </th>
+{#** 
+ * Copyright since 2007 PrestaShop SA and Contributors
+ * PrestaShop is an International Registered Trademark & Property of PrestaShop SA
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/OSL-3.0
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@prestashop.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
+ * versions in the future. If you wish to customize PrestaShop for your
+ * needs please refer to https://devdocs.prestashop.com/ for more information.
+ *
+ * @author    PrestaShop SA and Contributors <contact@prestashop.com>
+ * @copyright Since 2007 PrestaShop SA and Contributors
+ * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+ *#}
 
-          <th class="text-right" style="width: 5rem">
-            <button
-              type="submit"
-              class="btn btn-primary"
-              name="cellules_filter_submit"
-              title="{{ "Search"|trans({}, 'Admin.Actions') }}"
-            >
-              <i class="material-icons">search</i>
-              {{ "Search"|trans({}, 'Admin.Actions') }}
+{{ renderhook('displayAdminGridTableBefore', {
+  'grid': grid,
+  'legacy_controller': app.request.attributes.get('_legacy_controller'),
+  'controller': app.request.attributes.get('_controller')
+}) }}
+
+{{ form_start(grid.filter_form, {'attr': {'id': grid.id ~ '_filter_form', 'class': 'table-responsive'}}) }}
+
+<table class="grid-table js-grid-table table {% if is_ordering_column(grid) %}grid-ordering-column{% endif %} {% if grid.attributes.is_empty_state %}border-0{% endif %}"
+       id="{{ grid.id }}_grid_table"
+       data-query="{{ grid.data.query }}"
+>
+  <thead class="thead-default">
+  {% block grid_table_head %}
+    {{ include('@PrestaShop/Admin/Common/Grid/Blocks/Table/headers_row.html.twig', {'grid': grid}) }}
+    {% if grid.actions.bulk|length > 0 or grid.filter_form|length > 1 %}
+      {{ include('@PrestaShop/Admin/Common/Grid/Blocks/Table/filters_row.html.twig', {'grid': grid}) }}
+    {% endif %}
+
+    {% endblock %}
+
+  </thead>
+<tbody>
+  {% block grid_table_body %}
+    {% if cellules is not empty %}
+    {% for cellule in cellules %}
+      {% block cellule_table_row %}
+        <tr data-uniturl="{{ cellule.unit_action_url|default('#') }}" data-cellule-id="{{ cellule.id_cellule }}">
+          <td>
+            <label class="form-check-label" for="bulk_action_selected_cellule-{{ cellule.id_cellule }}">
+              {{ cellule.id_cellule }}
+            </label>
+          </td>
+
+          <td>
+            <a href="{{ path('admin_cellule_view', {'celluleId': cellule.id_cellule}) }}"><img src="/prestashop/img/cellule_logo/{{ cellule.logo|raw }}" 
+            alt="" class="imgm img-thumbnail" style="width:150px;"></a>
+          </td>
+
+          <td>
+            <a href="{{ path('admin_cellule_view', {'celluleId': cellule.id_cellule}) }}">{{ cellule.nom|default('N/A'|trans({}, 'Admin.Global')) }}</a>
+          </td>
+
+          <td>
+            {{ cellule.email|default('') }}
+          </td>
+
+          <td>
+            {{ cellule.telephone|default('') }}
+          </td>
+
+          <td>
+            {{ cellule.adresse|default('') }}
+          </td>
+
+          <td>
+            {{ cellule.Imm_fiscale|default('') }}
+          </td>
+
+          <td class="text-center">
+            <button type="button" class="toggle-cellule btn{% if cellule.valid %}-success{% else %}-danger{% endif %}" data-id="{{ cellule.id_cellule }}" data-valid="{{ cellule.valid }}">
+              {% if cellule.valid == 1 %}
+                Accepter
+              {% else %}
+                Refuser
+              {% endif %}
             </button>
-          </th>
+          </td>
+
+<td class="action-type column-actions">                          
+  <div class="btn-group-action text-right">
+    <div class="btn-group">
+    <a class="btn tooltip-link js-link-row-action dropdown-item grid-view-row-link" href="{{ path('admin_cellule_view', {'celluleId': cellule.id_cellule}) }}">
+      <span class="material-icons">visibility</span>
+    </a>
+    </div>
+    <div class="btn-group">
+      <a class="btn tooltip-link js-submit-row-action dropdown-item grid-delete-row-link" href="{{ path('admin_cellule_delete', {'celluleId': cellule.id_cellule}) }}" 
+         data-confirm-message="Delete selected item?" data-method="POST" data-toggle="pstooltip" data-placement="top" data-original-title="Delete">
+        <i class="material-icons">delete</i>
+      </a>
+    </div>
+  </div>
+</td>
+
         </tr>
-      {% endblock %}
- </thead>
+      {% endblock cellule_table_row %}
+    {% else %}
+      {{ include('@PrestaShop/Admin/Common/Grid/Blocks/Table/empty_row.html.twig', {'grid': grid}) }}
+    {% endfor %}
+    {% endif %}
+  {% endblock grid_table_body %}
+</tbody>
+
+
+
+
+{% block grid_table_footer %}{% endblock %}
+
+</table>
+{{ form_end(grid.filter_form) }}
+
+{{ renderhook('displayAdminGridTableAfter', {
+'grid': grid,
+'legacy_controller': app.request.attributes.get('_legacy_controller'),
+'controller': app.request.attributes.get('_controller')
+}) }}

@@ -12,7 +12,7 @@
   position: absolute;
   left: 7rem;
   color: #100e0e;
-  bottom: 0;
+  bottom: 7rem;
   width: 100%; 
   padding: 1rem;
 }
@@ -36,16 +36,22 @@
 .carousel .direction .carousel-control i {
   background: transparent;
 }
+@media (max-width: 767px){
+  .carousel .carousel-item .caption {
+    text-align: left;
+    top: 2rem;
+  }
+}
 @media (max-width: 991px){
   .carousel {
     left: 1.05rem !important;
   }
   .carousel .carousel-item .caption {
     text-align: left;
-    bottom: 5rem;
+    bottom: 0;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1365px) {
   .product-slider .col-lg-2 {
     min-width: 20%;
   }
@@ -53,9 +59,9 @@
     clear: left;
   }
 }
-@media (min-width: 992px) and (max-width: 1199px) {
+@media (min-width: 992px) and (max-width: 1365px) {
   .product-slider .col-lg-2 {
-    min-width: 25%;
+    min-width: 25% !important;
   }
   .product-slider .col-lg-2:nth-child(4n+1) {
     clear: left;

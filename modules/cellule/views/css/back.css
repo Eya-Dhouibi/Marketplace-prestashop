@@ -25,6 +25,7 @@
 * Don't forget to prefix your containers with your own identifier
 * to avoid any conflicts with others containers.
 */
+@import url('https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css');
 .content-div {
     background-color: #fff;
     margin-top: 1rem;
