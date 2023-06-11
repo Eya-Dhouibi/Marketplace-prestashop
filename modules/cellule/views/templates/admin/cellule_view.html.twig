@@ -1,42 +1,46 @@
-{% extends "PrestaShopBundle:Admin:layout.html.twig" %}
- {% block javascripts %}
+ {% extends "PrestaShopBundle:Admin:layout.html.twig" %}
+
+{% block javascripts %}
     {{ parent() }}
     <script>
-        $(document).on('click', '.toggle-cellule-refuser, .toggle-cellule-accepter', function() {
-    var celluleId = $(this).data('id');
-    var valid = $(this).data('valid');
+       $(document).ready(function() {
+    $(document).on('click', '.toggle-cellule-refuser, .toggle-cellule-accepter', function() {
+        var celluleId = $(this).data('id');
+        var valid = $(this).data('valid');
 
-    $.ajax({
-        url: "{{ path('admin_cellule_toggle', {'id_cellule': 'CELLULE_ID', 'valid': 'VALID_VALUE'}) }}".replace('CELLULE_ID', celluleId).replace('VALID_VALUE', valid),
-        type: 'POST',
-        data: {
-            id_cellule: celluleId,
-            valid: valid
-        },
-        success: function(data) {
-            var refuserButton = $('.toggle-cellule-refuser[data-id=' + celluleId + ']');
-            var accepterButton = $('.toggle-cellule-accepter[data-id=' + celluleId + ']');
+        $.ajax({
+            url: "{{ path('admin_cellule_toggle', {'celluleId': 'CELLULE_ID', 'valid': 'VALID_VALUE'}) }}".replace('CELLULE_ID', celluleId).replace('VALID_VALUE', valid),
+            type: 'POST',
+            data: {
+                id_cellule: celluleId,
+                valid: valid
+            },
+            success: function(data) {
+                var refuserButton = $('.toggle-cellule-refuser[data-id=' + celluleId + ']');
+                var accepterButton = $('.toggle-cellule-accepter[data-id=' + celluleId + ']');
 
-            if (valid == 1) {
-                refuserButton.text('Refuser').data('valid', 0);
-                accepterButton.text('Accepté').data('valid', 1);
-            } else {
-                refuserButton.text('Refusé').data('valid', 0);
-                accepterButton.text('Accepter').data('valid', 1);
+                if (valid == 1) {
+                    refuserButton.text('Refuser').data('valid', 0);
+                    accepterButton.text('Accepté').data('valid', 1);
+                    alert("Cellule validée");
+                } else {
+                    refuserButton.text('Refusé').data('valid', 0);
+                    accepterButton.text('Accepter').data('valid', 1);
+                    alert("Cellule refusée");
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error(textStatus + ':' + errorThrown);
             }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.error(textStatus + ':' + errorThrown);
-        }
+        });
     });
 });
-
     </script>
 {% endblock %}
 
 {% block content %}
  {% block page_title %}
-    <h1 class="page-heading">{{ cellule['nom'] }}</h1>
+    <h1 class="page-heading">{{ cellule.nom}}</h1>
     <a href="#"><img class="logo-img-top img-thumbnail" 
     src="/prestashop/img/cellule_logo/{{ cellule['logo'] }}" alt="Logo" style="width:150px;"></a>
     {% endblock %}
@@ -59,15 +63,13 @@
         </li>
     </ul>
      <div class="confirmation">
-       <button type="button" class="btn btn-danger toggle-cellule-refuser" data-id="{{ cellule['id_cellule']}}" data-valid="0">
-       Refuser
-      </button>
-     <button type="button" class="btn btn-success toggle-cellule-accepter" data-id="{{ cellule['id_cellule']}}" data-valid="1">
-       Accepter
-     </button>
-
-        {# <a type="botton" class="btn btn-primary btn-valid" href="#">{{ 'envoyer un email'|trans({}, 'Admin.Actions') }}</a> #}
-    </div> 
+            <button type="button" class="btn btn-danger toggle-cellule-refuser" data-id="{{ cellule['id_cellule']}}" data-valid="0">
+                Refuser
+            </button>
+            <button type="button" class="btn btn-success toggle-cellule-accepter" data-id="{{ cellule['id_cellule']}}" data-valid="1">
+                Accepter
+            </button>
+        </div>
 {% endblock %} 
 
-{% endblock %}
+{% endblock %} 

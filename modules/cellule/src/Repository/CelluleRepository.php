@@ -192,12 +192,11 @@ class CelluleRepository
     }
 
  /**
- * @param Request $request
  * @param int $celluleId
  *
  * @throws DatabaseException
  */
-public function delete(Request $request, $celluleId): Response
+public function delete(Request $request, $celluleId): void
 {
     $tableNames = [
         'cellule_lang',
@@ -228,40 +227,25 @@ public function getCelluleById($celluleId)
        ->setParameter('id_cellule', $celluleId);
 
     $result = $qb->execute()->fetch();
-}
 
-   /**
+    return $result;
+  }
+
+/**
  * @param Request $request
- *
- * @return Response
+ * @param int $celluleId
  * @throws DatabaseException
  */
-public function validation(Request $request): Response
+public function validation(Request $request, int $celluleId, int $valid): void
 {
-    $tableNames = [
-        'cellule_lang',
-        'cellule',
-    ];
+    $qb = $this->connection->createQueryBuilder();
+    $qb
+        ->update($this->dbPrefix . 'cellule')
+        ->set('valid', $valid)
+        ->andWhere('id_cellule = :id_cellule')
+        ->setParameter('id_cellule', $celluleId);
 
-    $id_cellule = $request->request->getInt('id_cellule');
-    $valid = $request->request->getInt('valid');
-
-    foreach ($tableNames as $tableName) {
-        $qb = $this->connection->createQueryBuilder();
-        $qb
-            ->update($this->dbPrefix . $tableName)
-            ->set('valid', $valid)
-            ->andWhere('id_cellule = :id_cellule')
-            ->setParameter('id_cellule', $id_cellule);
-
-        $this->executeQueryBuilder($qb, 'Validation from multi-store tables error');
-    } 
-
-    // Retourner une réponse appropriée ici si nécessaire
-    // $response = new Response();
-    // ...
-    // return $response;
+    $this->executeQueryBuilder($qb, 'Validation from multi-store tables error');
 }
-
 
 }

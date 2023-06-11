@@ -21,10 +21,10 @@ admin_cellule_delete:
      
 
 admin_cellule_toggle:
-    path: /admin/cellule/toggle/{celluleId}/{valid}
-    defaults:
-        _controller: 'Cellule\Controller\Admin\AdminCelluleController::toggleCellule'
-    methods: [GET, POST]
+  path: /admin/cellule/toggle/{celluleId}/{valid}
+  defaults:
+    _controller: 'Cellule\Controller\Admin\AdminCelluleController::validateAction'
+  methods: [GET, POST]
 
 
 

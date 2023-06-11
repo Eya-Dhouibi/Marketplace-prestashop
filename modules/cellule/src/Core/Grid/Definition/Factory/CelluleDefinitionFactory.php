@@ -108,6 +108,19 @@ final class CelluleDefinitionFactory extends AbstractGridDefinitionFactory
                 ->setName($this->trans('Actions', [], 'Modules.cellule.Admin'))
                 ->setOptions([
                     'actions' => (new RowActionCollection())
+
+                    ->add(
+                        (new SubmitRowAction('view'))
+                        ->setName($this->trans('view', [], 'Admin.Actions'))
+                        ->setIcon('view')
+                        ->setOptions([
+                            'method' => 'GET',
+                            'route' => 'admin_cellule_view',
+                            'route_param_name' => 'celluleId',
+                            'route_param_field' => 'id_cellule',
+                         
+                        ])
+                    )
                         ->add(
                             (new SubmitRowAction('delete'))
                             ->setName($this->trans('Delete', [], 'Admin.Actions'))

@@ -84,19 +84,19 @@ class AdminCelluleController extends FrameworkBundleAdminController
     
     }
 
-    public function viewAction($celluleId)
-    {
-        $celluleRepository = $this->get('prestashop.module.cellule.repository');
-        $cellule = $celluleRepository->getCelluleById($celluleId);
-    
-        if (!$cellule) {
-            throw $this->createNotFoundException('Cellule non trouvée');
-        }
-    
-        return $this->render('@Modules/cellule/views/templates/admin/cellule_view.html.twig', [
-            'cellule' => $cellule,
-        ]);
-    }
+/**
+ * @param int $celluleId
+ */
+public function viewAction($celluleId)
+{
+    $celluleRepository = $this->get('prestashop.module.cellule.repository');
+    $cellule = $celluleRepository->getCelluleById($celluleId);
+
+    return $this->render('@Modules/cellule/views/templates/admin/cellule_view.html.twig', [
+        'cellule' => $cellule
+    ]);
+}
+
 
 /**
  * @AdminSecurity("is_granted('delete', request.get('_legacy_controller'))", message="Access denied.")
@@ -125,7 +125,22 @@ public function deleteAction($celluleId)
 
     // Rediriger l'utilisateur vers une page appropriée
     return $this->redirectToRoute('admin_cellule');
-}
+   }
+
+/**
+ * @param Request $request
+ * @param int $celluleId
+ * @return Response
+ */
+  public function validateAction(Request $request, int $celluleId, int $valid): Response
+  {
+    $celluleRepository = $this->get('prestashop.module.cellule.repository');
+    $valid = $celluleRepository->validation($request, $celluleId, $valid);
+
+
+    return new Response($message); 
+  }
+
 
     /**
      * @param Request $request
